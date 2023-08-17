@@ -1,5 +1,5 @@
-#!/usr/bin/env node
+#!/usr/bin/env -S deno run -A
 
-import { program } from "./command";
+import { program } from "./command.ts";
 
-program.parse();
+await program.parse(Deno.args);

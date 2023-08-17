@@ -1,6 +1,6 @@
-import * as fs from "fs/promises";
-import * as path from "path";
-import { findAllExercises } from "./findAllExercises";
+import * as fs from "node:fs/promises";
+import * as path from "node:path";
+import { findAllExercises } from "./findAllExercises.ts";
 
 /**
  * Adds a bunch of scripts, like e-01, e-02 to package.json
@@ -9,10 +9,10 @@ import { findAllExercises } from "./findAllExercises";
  */
 
 export const prepareStackblitz = async () => {
-  const packageJsonPath = path.resolve(process.cwd(), "package.json");
+  const packageJsonPath = path.resolve(Deno.cwd(), "package.json");
   const packageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf8"));
 
-  const srcPath = path.resolve(process.cwd(), "./src");
+  const srcPath = path.resolve(Deno.cwd(), "./src");
   const exerciseFiles = await findAllExercises(srcPath, {
     allowedTypes: ["problem", "explainer"],
   });

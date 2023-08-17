@@ -1,14 +1,14 @@
-import * as path from "path";
-import { detectExerciseType } from "./detectExerciseType";
-import { runFileBasedExercise } from "./runFileBasedExercise";
-import { runPackageJsonExercise } from "./runPackageJsonExercise";
-import { findExercise } from "./findAllExercises";
+import * as path from "node:path";
+import { detectExerciseType } from "./detectExerciseType.ts";
+import { runFileBasedExercise } from "./runFileBasedExercise.ts";
+import { runPackageJsonExercise } from "./runPackageJsonExercise.ts";
+import { findExercise } from "./findAllExercises.ts";
 
 const findExerciseToRun = async (
   exercise: string,
-  runSolution: boolean,
+  runSolution?: boolean,
 ): Promise<string> => {
-  const srcPath = path.resolve(process.cwd(), "./src");
+  const srcPath = path.resolve(Deno.cwd(), "./src");
 
   const exerciseFile = await findExercise(srcPath, {
     num: exercise,
@@ -17,16 +17,16 @@ const findExerciseToRun = async (
 
   if (!exerciseFile) {
     console.log(`Exercise ${exercise} not found`);
-    process.exit(1);
+    Deno.exit(1);
   }
 
   return exerciseFile;
 };
 
-export const runExercise = async (exercise: string, runSolution: boolean) => {
+export const runExercise = async (exercise: string, runSolution?: boolean) => {
   if (!exercise) {
     console.log("Please specify an exercise");
-    process.exit(1);
+    Deno.exit(1);
   }
 
   const exerciseFile = await findExerciseToRun(exercise, runSolution);
@@ -37,7 +37,7 @@ export const runExercise = async (exercise: string, runSolution: boolean) => {
     console.log(
       `Exercise ${exercise} is not runnable. Follow the instructions in the video to complete it.`,
     );
-    process.exit(0);
+    Deno.exit(0);
   }
 
   switch (exerciseType) {

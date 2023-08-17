@@ -1,24 +1,15 @@
-import { Command } from "commander";
-import { runExercise } from "./runExercise";
-import { prepareStackblitz } from "./prepareStackblitz";
+import { Command } from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
+import { runExercise } from "./runExercise.ts";
+import { prepareStackblitz } from "./prepareStackblitz.ts";
 
-export const program = new Command();
-
-program.version("0.0.1");
+export const program = new Command().name("tt-cli").version("0.0.1");
 
 program
   .command("run <exercise>")
   .alias("exercise <exercise>")
   .description("Runs an exercise on watch mode")
   .option("-s, --solution", "Run the solution")
-  .action(
-    (
-      exercise: string,
-      options: {
-        solution: boolean;
-      },
-    ) => runExercise(exercise, options.solution),
-  );
+  .action(({ solution }, exercise) => runExercise(exercise, solution));
 
 program
   .command("prepare-stackblitz")

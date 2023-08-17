@@ -1,5 +1,6 @@
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
 
+// deno-lint-ignore require-await
 export const runPackageJsonExercise = async (exerciseFile: string) => {
   // Install the packages with pnpm
   execSync("pnpm install", {

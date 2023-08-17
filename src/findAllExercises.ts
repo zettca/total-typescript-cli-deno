@@ -1,5 +1,5 @@
-import * as fg from "fast-glob";
-import path from "path";
+import * as fg from "npm:fast-glob";
+import path from "node:path";
 
 const searchToGlob = (search: {
   num?: string;
