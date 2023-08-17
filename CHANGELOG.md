@@ -1,5 +1,10 @@
 # @total-typescript/exercise-cli
 
+## 0.4.0
+
+- Rewrite in Deno 🤷 🦕
+- Add bash completions
+
 ## 0.3.1
 
 ### Patch Changes

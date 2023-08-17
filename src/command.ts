@@ -1,8 +1,13 @@
-import { Command } from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
+import {
+  Command,
+  CompletionsCommand,
+} from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
 import { runExercise } from "./runExercise.ts";
 import { prepareStackblitz } from "./prepareStackblitz.ts";
 
 export const program = new Command().name("tt-cli").version("0.0.1");
+
+program.command("completions", new CompletionsCommand());
 
 program
   .command("run <exercise>")
